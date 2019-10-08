@@ -1,4 +1,4 @@
-#cookbook-rest :cookies
+#cookbook-rest :cookie:
 
 - RESTful API <br>
 - MySQL <br>
