@@ -1,6 +1,6 @@
 #cookbook-rest :cookie:
 
-- RESTful API <br>
-- MySQL <br>
+- RESTful API 
 - Spring
+- MySQL 
 - JWT
