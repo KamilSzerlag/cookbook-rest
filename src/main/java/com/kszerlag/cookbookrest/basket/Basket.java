@@ -1,15 +1,17 @@
 package com.kszerlag.cookbookrest.basket;
 
+import org.joda.money.Money;
+
 import java.time.LocalDate;
 import java.util.List;
 
 /**
  * @author kszerlag
  */
-public class Basket {
+class Basket {
 
     private List<Product> products;
-    private Double cost;
+    private Money cost;
     private LocalDate date;
 
     public List<Product> getProducts() {
@@ -20,11 +22,11 @@ public class Basket {
         this.products = products;
     }
 
-    public Double getCost() {
+    public Money getCost() {
         return cost;
     }
 
-    public void setCost(Double cost) {
+    public void setCost(Money cost) {
         this.cost = cost;
     }
 

@@ -11,6 +11,10 @@ public interface RecipeFacade {
 
     Recipe cloneExistingRecipe(Recipe recipe);
 
+    void removeRecipe(Recipe recipe);
+
+    Recipe editRecipe(Recipe recipe);
+
     List<Recipe> searchRecipe(String name);
 
     List<Recipe> searchByFoodCategory(List<FoodCategory>);

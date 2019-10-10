@@ -1,5 +1,8 @@
 package com.kszerlag.cookbookrest.basket;
 
+import com.kszerlag.cookbookrest.util.Purchasable;
+import org.joda.money.Money;
+
 /**
  * @author kszerlag
  *
@@ -7,10 +10,10 @@ package com.kszerlag.cookbookrest.basket;
  * can be added
  * to basket
  */
-public class Product {
+public class Product implements Purchasable {
 
     private String name;
-    private Double price;
+    private Money price;
 
     public String getName() {
         return name;
@@ -20,11 +23,11 @@ public class Product {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public Money getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Money price) {
         this.price = price;
     }
 }

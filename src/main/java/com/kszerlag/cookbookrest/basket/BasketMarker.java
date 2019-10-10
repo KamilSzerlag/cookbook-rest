@@ -8,12 +8,11 @@ package com.kszerlag.cookbookrest.basket;
  * state
  *
  */
-public enum BasketMarker {
+enum BasketMarker {
 
     TO_BUY("To Buy"),
     BOUGHT("Bought"),
-    UNAVAILABLE("Unavailable"),
-    MOVE_TO_NEW("Move to new basket");
+    UNAVAILABLE("Unavailable");
 
     private String description;
 
