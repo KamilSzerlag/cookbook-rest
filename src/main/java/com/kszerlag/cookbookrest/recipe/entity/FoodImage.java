@@ -1,9 +1,15 @@
 package com.kszerlag.cookbookrest.recipe.entity;
 
+import com.kszerlag.cookbookrest.util.BaseEntity;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
-public class FoodImage {
+public class FoodImage extends BaseEntity {
+
+    @OneToOne
+    private Recipe recipe;
 
     private String path;
     private Integer width;

@@ -9,8 +9,11 @@ package com.kszerlag.cookbookrest.util;
  */
 public class BaseDto {
 
-    private final Long id;
+    private Long id;
     private String msg;
+
+    public BaseDto() {
+    }
 
     public BaseDto(Long id) {
         this.id = id;

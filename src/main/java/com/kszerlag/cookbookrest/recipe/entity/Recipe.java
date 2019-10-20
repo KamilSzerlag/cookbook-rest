@@ -1,18 +1,38 @@
 package com.kszerlag.cookbookrest.recipe.entity;
 
-import com.kszerlag.cookbookrest.util.Tag;
+import com.kszerlag.cookbookrest.util.BaseEntity;
 
-import javax.persistence.Entity;
-import java.util.List;
+import javax.persistence.*;
+import java.util.Iterator;
+import java.util.Set;
 
 @Entity
-public class Recipe {
+public class Recipe extends BaseEntity {
 
+    @Column(unique = true,
+            nullable = false)
+    private String name;
+
+    @OneToOne(mappedBy = "recipe")
     private FoodImage foodImage;
-    private List<FoodCategory> foodCategories;
-    private List<Ingredient> ingredients;
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = FoodCategory.class)
+    private Set<FoodCategory> foodCategories;
+
+    @OneToMany(mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
+
+    @Column(nullable = false)
     private Integer cookingTime; //cooking time in minutes
-    private List<Tag> tags;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public FoodImage getFoodImage() {
         return foodImage;
@@ -22,11 +42,11 @@ public class Recipe {
         this.foodImage = foodImage;
     }
 
-    public List<FoodCategory> getFoodCategories() {
+    public Set<FoodCategory> getFoodCategories() {
         return foodCategories;
     }
 
-    public void setFoodCategories(List<FoodCategory> foodCategories) {
+    public void setFoodCategories(Set<FoodCategory> foodCategories) {
         this.foodCategories = foodCategories;
     }
 
@@ -38,32 +58,28 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
-    public List<Ingredient> getIngredients() {
+    public Set<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public List<Ingredient> addIngredient(Ingredient ingredient) {
-        if (ingredients != null)
-            ingredients.add(ingredient);
+    public Set<Ingredient> addIngredient(Ingredient ingredient) {
+        if (ingredients != null) {
+            boolean isAdded = ingredients.add(ingredient);
+            if (!isAdded) {
+                for (Iterator<Ingredient> iterator = ingredients.iterator(); iterator.hasNext(); ) {
+                    Ingredient next = iterator.next();
+                    if (next.equals(ingredient)) {
+                        Double quantity = ingredient.getQuantity();
+                        quantity += 1.0d;
+                        return ingredients;
+                    }
+                }
+            }
+        }
         return ingredients;
     }
-
-    public List<FoodCategory> addFoodCategory(FoodCategory foodCategory) {
-        if (foodCategories != null)
-            foodCategories.add(foodCategory);
-        return foodCategories;
-    }
-
 }

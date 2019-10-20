@@ -1,18 +1,37 @@
 package com.kszerlag.cookbookrest.basket;
 
+import com.kszerlag.cookbookrest.util.BaseEntity;
 import org.joda.money.Money;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 
 /**
  * @author kszerlag
+ * <p>
+ * Contains products
+ * intended for
  */
-class Basket {
+@Entity
+class Basket extends BaseEntity {
 
+    private String name;
+
+    @OneToMany(mappedBy = "basket", orphanRemoval = true)
     private List<Product> products;
+
     private Money cost;
     private LocalDate date;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public List<Product> getProducts() {
         return products;

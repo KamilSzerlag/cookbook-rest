@@ -3,27 +3,31 @@ package com.kszerlag.cookbookrest.recipe;
 import com.kszerlag.cookbookrest.recipe.entity.FoodCategory;
 import com.kszerlag.cookbookrest.recipe.entity.Recipe;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 
 public interface RecipeFacade {
 
-    Recipe newBlankRecipe(RecipeDto recipeDto);
+    Recipe saveNewRecipe(Recipe recipe);
 
     Recipe cloneExistingRecipe(Recipe recipe);
 
-    void removeRecipe(Recipe recipe);
+    Recipe findRecipeById(Long id);
 
-    Recipe editRecipe(Recipe recipe);
+    void removeRecipe(Long id);
 
-    List<Recipe> searchRecipe(String name);
+    Recipe editRecipe(Long id);
 
-    List<Recipe> searchByFoodCategory(List<FoodCategory>);
+    List<Recipe> findAll();
+
+    List<Recipe> findByName(String name);
+
+    List<Recipe> findByFoodCategories(List<FoodCategory> foodCategories);
 
     List<Recipe> getUserRecipes();
 
-    Recipe randomRecipe();
+    Recipe getRandomRecipe();
 
-    Mail sendAsMail();
-
-
+    String recognizeRecipeDescription(File file, BufferedImage bufferedImage);
 }

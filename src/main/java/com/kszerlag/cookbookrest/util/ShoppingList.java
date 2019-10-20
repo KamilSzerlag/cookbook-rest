@@ -57,7 +57,13 @@ public class ShoppingList<T extends Purchasable> extends ArrayList<T> implements
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
+        c.forEach(x -> cost.plus(x.getPrice()));
         return super.addAll(c);
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        return super.addAll(index, c);
     }
 
     @Override
@@ -70,5 +76,20 @@ public class ShoppingList<T extends Purchasable> extends ArrayList<T> implements
     public T remove(int index) {
         cost.minus(get(index).getPrice());
         return super.remove(index);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ShoppingList<?> that = (ShoppingList<?>) o;
+        return com.google.common.base.Objects.equal(currency, that.currency) &&
+                com.google.common.base.Objects.equal(cost, that.cost);
+    }
+
+    @Override
+    public int hashCode() {
+        return com.google.common.base.Objects.hashCode(super.hashCode(), currency, cost);
     }
 }

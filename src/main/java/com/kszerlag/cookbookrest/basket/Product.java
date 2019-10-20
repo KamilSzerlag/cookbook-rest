@@ -1,7 +1,11 @@
 package com.kszerlag.cookbookrest.basket;
 
+import com.kszerlag.cookbookrest.util.BaseEntity;
 import com.kszerlag.cookbookrest.util.Purchasable;
 import org.joda.money.Money;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * @author kszerlag
@@ -10,10 +14,14 @@ import org.joda.money.Money;
  * can be added
  * to basket
  */
-public class Product implements Purchasable {
+@Entity
+public class Product extends BaseEntity implements Purchasable {
 
     private String name;
     private Money price;
+
+    @ManyToOne
+    private Basket basket;
 
     public String getName() {
         return name;
@@ -29,5 +37,13 @@ public class Product implements Purchasable {
 
     public void setPrice(Money price) {
         this.price = price;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 }

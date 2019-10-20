@@ -1,5 +1,9 @@
 package com.kszerlag.cookbookrest.recipe.entity;
 
+import com.kszerlag.cookbookrest.recipe.fail.NoSuchFoodCategoryException;
+
+import java.util.NoSuchElementException;
+
 public enum FoodCategory {
     DESSERT("Dessert"),
     MEAT("Meat"),
@@ -23,4 +27,11 @@ public enum FoodCategory {
         return type;
     }
 
+    public static FoodCategory from(String s) {
+        for (FoodCategory category : FoodCategory.values()) {
+            if (category.getType().equals(s))
+                return category;
+        }
+        throw new NoSuchFoodCategoryException(s);
+    }
 }
