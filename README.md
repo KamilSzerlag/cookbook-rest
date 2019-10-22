@@ -1,5 +1,4 @@
-
-#cookbook-rest :cookie:
+cookbook-rest :cookie:
 
 - RESTful API 
 - Spring
